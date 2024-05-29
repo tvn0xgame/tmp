@@ -1,0 +1,24 @@
+@startuml
+actor Пользователь
+participant "Каталог" as Catalog
+participant "Книга" as Book
+participant "Библиотекарь" as Librarian
+participant "База данных" as Database
+
+Пользователь -> Librarian: Запросить книгу
+Librarian -> Catalog: Найти книгу
+Catalog -> Database: Поиск книги по каталогу
+Database -> Catalog: Вернуть информацию о книге
+Catalog -> Librarian: Вернуть результат поиска
+
+alt if книга доступна
+    Librarian -> Book: Проверить статус доступности
+    Book -> Librarian: Книга доступна
+    Librarian -> Book: Обновить статус (взята на руки)
+    Book -> Database: Обновить информацию в базе данных
+    Database -> Book: Подтверждение обновления
+    Librarian -> Пользователь: Выдать книгу
+else if книга недоступна
+    Librarian -> Пользователь: Сообщить о недоступности
+end
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+node "Library Server" {
+    component "Web Server" {
+        [Web Application]
+    }
+    component "Application Server" {
+        [Business Logic]
+    }
+    database "Database Server" {
+        [Library Database]
+    }
+}
+
+node "User Device" {
+    [Web Browser]
+}
+
+node "Librarian Device" {
+    [Web Browser]
+}
+
+UserDevice -down-> "Library Server": HTTP
+"Librarian Device" -down-> "Library Server": HTTP
+"Web Application" -right-> "Application Server": API Calls
+"Application Server" -right-> "Library Database": SQL
+
+@enduml

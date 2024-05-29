@@ -1,0 +1,11 @@
+@startuml
+actor Библиотекарь
+participant "Каталог" as Catalog
+participant "Книга" as Book
+participant "База данных" as Database
+
+Библиотекарь -> Catalog: Добавить книгу
+Catalog -> Database: Внести информацию о книге
+Database -> Catalog: Подтверждение добавления
+Catalog -> Библиотекарь: Книга добавлена в фонд
+@enduml
