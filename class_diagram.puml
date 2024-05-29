@@ -1,0 +1,41 @@
+@startuml
+package "Library System" {
+    class Book {
+        - String title
+        - String author
+        - String isbn
+        - boolean isAvailable
+        + search() 
+        + markAsBorrowed()
+        + markAsReturned()
+    }
+
+    class User {
+        - String name
+        - int userId
+        + searchBook()
+        + borrowBook()
+        + returnBook()
+    }
+
+    class Librarian {
+        - String name
+        - int employeeId
+        + addBook()
+        + removeBook()
+        + searchBook()
+    }
+
+    class Catalog {
+        - List<Book> books
+        + addBook()
+        + removeBook()
+        + searchBook()
+    }
+
+    Book "1" *-- "1..*" Catalog
+    User "1" -- "0..*" Book : borrows
+    Librarian "1" -- "0..*" Book : manages
+    User <|-- Librarian
+}
+@enduml
